@@ -35,22 +35,6 @@ ACBfactor_vector=[0.03];
         for i = 1:21
             fprintf(fid,'%d ',Simu_data(i)); 
         end
-    %{
-            6   %Success prob
-            7    %channel is not in State H probability
-            8     %Throughput
-            9    % Tau_H
-            10  % N_H
-            11  % delay
-            12  % non-empty probability
-            13  % Success prob2 
-            14  % Throuput
-            15 % TauH2
-            16  %  %channel is not in State H probability
-            17 %  data throughput
-            18 %  data throughput2
-            19  % non-empty probability2
-      %}
     fprintf(fid,'\r\n'); 
     fclose(fid); 
  end
