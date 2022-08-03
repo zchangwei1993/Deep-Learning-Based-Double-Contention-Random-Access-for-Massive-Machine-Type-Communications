@@ -1,0 +1,57 @@
+clc
+clear
+format long
+M_Preamble_vector = 1;
+Node_Number_vector = 50:5:100;
+Total_subframe =10^6;
+e=2.71828;
+k=1;
+TransRate = 10^10;
+RunSim = 1;
+Input_rate_vector = 0.3;
+P_detect_vector=1;
+ACBfactor_vector=[0.03];
+ for AA = 1:max(size(P_detect_vector))
+      M_Preamble=M_Preamble_vector(1);
+      Node_Number = Node_Number_vector(1);
+      Aggregate_input_rate=Input_rate_vector*Node_Number;
+      P_detect=P_detect_vector(AA);
+      [optiQ,optiW]=Optimal_Back( P_detect, Aggregate_input_rate, Node_Number,M_Preamble );
+      ACBfactor=ACBfactor_vector(1;
+      UBfactor=1;
+       Simu_data = Simulation(Total_subframe,M_Preamble,Aggregate_input_rate,Node_Number,ACBfactor,UBfactor,TransRate,P_detect);
+        if k == 1
+           fid=fopen('data\Simulation.txt','w'); 
+           k=0;
+        else
+           fid=fopen('data\Simulation.txt','a'); 
+        end
+        fprintf(fid,'%f ',Node_Number);  
+        fprintf(fid,'%f ',M_Preamble); 
+        fprintf(fid,'%f ',Aggregate_input_rate);
+        fprintf(fid,'%f ',TransRate); 
+        fprintf(fid,'%f ',ACBfactor); 
+        fprintf(fid,'%f ',UBfactor); 
+        for i = 1:21
+            fprintf(fid,'%d ',Simu_data(i)); 
+        end
+    %{
+            6   %Success prob
+            7    %channel is not in State H probability
+            8     %Throughput
+            9    % Tau_H
+            10  % N_H
+            11  % delay
+            12  % non-empty probability
+            13  % Success prob2 
+            14  % Throuput
+            15 % TauH2
+            16  %  %channel is not in State H probability
+            17 %  data throughput
+            18 %  data throughput2
+            19  % non-empty probability2
+      %}
+    fprintf(fid,'\r\n'); 
+    fclose(fid); 
+ end
+
